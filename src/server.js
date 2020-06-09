@@ -1,14 +1,27 @@
 //var express = require("express"); // nap thu vien express vao
-import express from "express"
+import express from "express";
+import ConnectDB from "./config/connectDB";
+import ContactModel from "./models/contact.model";
+
 var app = express();
 
-var hostname = "localhost";
-var port = 8017;
+//Connect to MonggoDB
+ConnectDB();
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello World !!!</h1>")
+
+app.get("/test-database", async (req, res) => {
+  try {
+    let item = {
+      userId: "123456789",
+      contactId: "1238092498234",
+    };
+    let contact = await ContactModel.createNew(item);
+    res.send(contact);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-app.listen(port, hostname, () => {
-  console.log(`Hello Minh Thanh, Running at -  ${hostname}:${port}`);
+app.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
+  console.log(`Hello Minh Thanh, Running at -  ${process.env.APP_HOST}:${process.env.APP_PORT}`);
 });

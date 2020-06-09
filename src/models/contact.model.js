@@ -12,4 +12,10 @@ let contactSchema = new Schema({
   deletedAt: { type: Number, default: null }
 });
 
+contactSchema.statics = {
+  createNew(item) {
+    return this.create(item);
+  }
+}
+
 module.exports = mongoose.model("contact", contactSchema) // de so it vi len CSDL auto them "s"
