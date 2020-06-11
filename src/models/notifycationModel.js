@@ -20,4 +20,10 @@ let notificationSchema = new Schema({
 
 });
 
+contactSchema.statics = {
+  createNew(item) {
+    return this.create(item);
+  }
+}
+
 module.exports = mongoose.model("notification", notificationSchema) // de so it vi len CSDL auto them "s"
