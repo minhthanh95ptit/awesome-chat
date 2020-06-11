@@ -14,10 +14,16 @@ let messageSchema = new Schema({
     avatar: String
   },
   text: String,
-  file: { data: Buffer, contentType: String } // Buffer : Nhi phan, contentTyle: anh,stirng...
+  file: { data: Buffer, contentType: String }, // Buffer : Nhi phan, contentTyle: anh,stirng...
   createdAt: { type: Number, default: Date.now },
   updatedAt: { type: Number, default: null },
   deletedAt: { type: Number, default: null }
 });
+
+messageSchema.statics = {
+  createNew(item) {
+    return this.create(item);
+  }
+}
 
 module.exports = mongoose.model("message", messageSchema) // de so it vi len CSDL auto them "s"
